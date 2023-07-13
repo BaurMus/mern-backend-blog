@@ -1,7 +1,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import {UserController} from './controllers/index.js';
-import { loginValidation, registerValidation } from './validations.js';
+import {PostController, UserController} from './controllers/index.js';
+import { loginValidation, postCreateValidation, registerValidation } from './validations.js';
 import {handleValidationErrors, checkAuth} from './utils/index.js';
 
 mongoose
@@ -16,6 +16,8 @@ app.use(express.json());
 app.post('/auth/register', registerValidation, handleValidationErrors, UserController.register);
 app.post('/auth/login',loginValidation, handleValidationErrors, UserController.login);
 app.get('/auth/me', checkAuth, UserController.getMe);
+
+app.post('/posts', checkAuth, postCreateValidation, handleValidationErrors, PostController.create);
 
 app.listen(4444, (err) => {
   if (err) {
