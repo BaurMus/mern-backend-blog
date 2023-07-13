@@ -2,7 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import {UserController} from './controllers/index.js';
 import { loginValidation, registerValidation } from './validations.js';
-import {handleValidationErrors} from './utils/index.js';
+import {handleValidationErrors, checkAuth} from './utils/index.js';
 
 mongoose
   .connect('mongodb+srv://musilimovb:bake1984@cluster0.rowds20.mongodb.net/blog?retryWrites=true&w=majority')
@@ -15,6 +15,7 @@ app.use(express.json());
 
 app.post('/auth/register', registerValidation, handleValidationErrors, UserController.register);
 app.post('/auth/login',loginValidation, handleValidationErrors, UserController.login);
+app.get('/auth/me', checkAuth, UserController.getMe);
 
 app.listen(4444, (err) => {
   if (err) {
