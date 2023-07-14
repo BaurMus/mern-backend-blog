@@ -17,6 +17,7 @@ app.post('/auth/register', registerValidation, handleValidationErrors, UserContr
 app.post('/auth/login',loginValidation, handleValidationErrors, UserController.login);
 app.get('/auth/me', checkAuth, UserController.getMe);
 
+app.get('/posts', PostController.getAll);
 app.post('/posts', checkAuth, postCreateValidation, handleValidationErrors, PostController.create);
 
 app.listen(4444, (err) => {
