@@ -21,6 +21,7 @@ app.get('/posts', PostController.getAll);
 app.get('/tags', PostController.getLastTags);
 app.get('/posts/:id', PostController.getOne);
 app.post('/posts', checkAuth, postCreateValidation, handleValidationErrors, PostController.create);
+app.delete('/posts/:id', checkAuth, PostController.remove);
 
 app.listen(4444, (err) => {
   if (err) {
