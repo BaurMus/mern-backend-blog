@@ -18,6 +18,7 @@ app.post('/auth/login',loginValidation, handleValidationErrors, UserController.l
 app.get('/auth/me', checkAuth, UserController.getMe);
 
 app.get('/posts', PostController.getAll);
+app.get('/tags', PostController.getLastTags);
 app.get('/posts/:id', PostController.getOne);
 app.post('/posts', checkAuth, postCreateValidation, handleValidationErrors, PostController.create);
 
