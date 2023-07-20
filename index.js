@@ -1,18 +1,19 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import multer from 'multer';
+import cors from 'cors';
 
 import {PostController, UserController} from './controllers/index.js';
 import { loginValidation, postCreateValidation, registerValidation } from './validations.js';
 import {handleValidationErrors, checkAuth} from './utils/index.js';
 
 mongoose
-  .connect('mongodb+srv://musilimovb:bake1984@cluster0.rowds20.mongodb.net/blog?retryWrites=true&w=majority')
+  .connect(process.env.MONGODB_URI)
   .then(() => console.log('DataBase OK'))
   .catch((err) => console.log('DataBase Error', err));
 
 const app = express();
-
+app.use(cors());
 const storage = multer.diskStorage({
   destination: (req, file ,cb) => {
     cb(null, "uploads");
@@ -44,7 +45,7 @@ app.post('/upload', checkAuth, upload.single('image'), (req, res) => {
   });
 });
 
-app.listen(4444, (err) => {
+app.listen(process.env.PORT || 4444, (err) => {
   if (err) {
     return console.log(err);
   }
