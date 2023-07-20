@@ -10,7 +10,7 @@ COPY . /mern-backend-blog
 # Install the application dependencies
 RUN npm install
 
-EXPOSE 80
+EXPOSE 8080
 
 # Define the entry point for the container
 CMD ["npm", "start"]
