@@ -8,7 +8,7 @@ import { loginValidation, postCreateValidation, registerValidation } from './val
 import {handleValidationErrors, checkAuth} from './utils/index.js';
 
 mongoose
-  .connect('mongodb+srv://musilimovb:bake1984@cluster0.rowds20.mongodb.net/blog?retryWrites=true&w=majority')
+  .connect(process.env.MONGODB_URI)
   .then(() => console.log('DataBase OK'))
   .catch((err) => console.log('DataBase Error', err));
 
@@ -45,7 +45,7 @@ app.post('/upload', checkAuth, upload.single('image'), (req, res) => {
   });
 });
 
-app.listen(4444, (err) => {
+app.listen(process.env.PORT || 4444, (err) => {
   if (err) {
     return console.log(err);
   }
