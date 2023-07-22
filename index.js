@@ -9,6 +9,7 @@ import {handleValidationErrors, checkAuth} from './utils/index.js';
 
 mongoose
   .connect('mongodb+srv://musilimovb:bake1984@cluster0.rowds20.mongodb.net/blog?retryWrites=true&w=majority')
+  // .connect('mongodb+srv://muslim2:4444@cluster0.rowds20.mongodb.net/blog?retryWrites=true&w=majority')
   .then(() => console.log('DataBase OK'))
   .catch((err) => console.log('DataBase Error', err));
 
@@ -33,6 +34,7 @@ app.post('/auth/login',loginValidation, handleValidationErrors, UserController.l
 app.get('/auth/me', checkAuth, UserController.getMe);
 
 app.get('/posts', PostController.getAll);
+app.get('/posts/popular', PostController.getAllPopular);
 app.get('/tags', PostController.getLastTags);
 app.get('/posts/:id', PostController.getOne);
 app.post('/posts', checkAuth, postCreateValidation, handleValidationErrors, PostController.create);

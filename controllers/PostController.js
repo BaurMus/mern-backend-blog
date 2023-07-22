@@ -15,6 +15,23 @@ export const getAll = async (req, res) => {
    }
 }
 
+export const getAllPopular = async (req, res) => {
+  try {
+    let posts = await PostModel.find().populate('user');
+
+    posts.map((obj) => obj.user.passwordHash = "");
+
+    posts = posts.sort((a, b) => b.viewsCount - a.viewsCount);
+
+    res.json(posts);
+  } catch(err) {
+    console.log(err);
+    res.status(500).json({
+      message: "Не удалось получить статьи"
+    });
+   }
+}
+
 export const getLastTags = async (req, res) => {
   try {
     const posts = await PostModel.find().limit(5);
