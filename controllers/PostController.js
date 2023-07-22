@@ -2,9 +2,11 @@ import PostModel from '../models/Post.js';
 
 export const getAll = async (req, res) => {
   try {
-    const posts = await PostModel.find().populate('user');
+    let posts = await PostModel.find().populate('user');
 
     posts.map((obj) => obj.user.passwordHash = "");
+
+    posts = posts.reverse();
 
     res.json(posts);
   } catch(err) {
