@@ -34,6 +34,7 @@ router.get('/posts/:id', PostController.getOne);
 router.post('/posts', checkAuth, postCreateValidation, handleValidationErrors, PostController.create);
 router.delete('/posts/:id', checkAuth, PostController.remove);
 router.patch('/posts/:id', checkAuth, postCreateValidation, handleValidationErrors, PostController.update);
+router.patch('/posts/:id/comment', checkAuth, PostController.addComment);
 
 //Upload route
 router.post('/upload', checkAuth, upload.single('image'), (req, res) => {

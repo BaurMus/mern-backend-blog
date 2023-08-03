@@ -162,3 +162,32 @@ export const update = async (req, res) => {
     });
   }
 }
+
+export const addComment = async (req, res) => {
+  try{
+    const postId = req.params.id;
+
+    await PostModel.updateOne({
+      _id: postId
+    }, {
+      $push:{ 
+        comments: {
+          name: req.body.name,
+          comment: req.body.comment,
+          userImageUrl: req.body.userImageUrl
+        }
+      }
+    }).then(() => {
+      res
+        .status(201)
+        .json({
+          message: "Комментарий успешно добавлен"
+        });
+    });
+  } catch(err) {
+    console.log(err);
+    res.status(500).json({
+      message: 'Не удалось добавить комментарий'
+    });
+  }
+}
