@@ -6,7 +6,7 @@ export const getAll = async (req, res) => {
 
     posts.map((obj) => obj.user.passwordHash = "");
 
-    posts = posts.reverse();
+    posts = posts.reverse(); 
 
     res.json(posts);
   } catch(err) {
@@ -14,7 +14,7 @@ export const getAll = async (req, res) => {
     res.status(500).json({
       message: "Не удалось получить статьи"
     });
-   }
+  }
 }
 
 export const getAllPopular = async (req, res) => {

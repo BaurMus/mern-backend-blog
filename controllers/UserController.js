@@ -104,24 +104,3 @@ export const getMe = async (req, res) => {
     });
   }
 }
-
-export const addComment = async (req, res) => {
-  try{
-    await User.updateOne({
-      _id: req.userId
-    }, {
-      comments: req.body.comments
-    }).then(() => {
-      res
-        .status(201)
-        .json({
-          message: "Комментарий успешно добавлен"
-        });
-    });
-  } catch(err) {
-    console.log(err);
-    res.status(500).json({
-      message: 'Не удалось добавить комментарий'
-    });
-  }
-}
