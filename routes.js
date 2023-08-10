@@ -36,8 +36,15 @@ router.delete('/posts/:id', checkAuth, PostController.remove);
 router.patch('/posts/:id', checkAuth, postCreateValidation, handleValidationErrors, PostController.update);
 router.patch('/comment/:id', checkAuth, PostController.addComment);
 
-//Upload route
+// Upload image for post route
 router.post('/upload', checkAuth, upload.single('image'), (req, res) => {
+  res.json({
+    url: `/uploads/${req.file.originalname}`
+  });
+});
+
+// Upload image for avatar
+router.post('/upload/avatar', upload.single('image'), (req, res) => {
   res.json({
     url: `/uploads/${req.file.originalname}`
   });
