@@ -4,7 +4,7 @@ export const getAll = async (req, res) => {
   try {
     let posts = await PostModel.find().populate('user');
 
-    posts.map((obj) => obj.user.passwordHash = "_");
+    posts.map((obj) => obj.user.passwordHash = "");
 
     posts = posts.reverse(); 
 
