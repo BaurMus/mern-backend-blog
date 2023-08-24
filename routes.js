@@ -1,5 +1,6 @@
 import express from 'express';
 import multer from 'multer';
+import fs from 'fs';
 
 import {PostController, UserController} from './controllers/index.js';
 import { loginValidation, postCreateValidation, registerValidation } from './validations.js';
@@ -9,6 +10,9 @@ const router = express.Router();
 
 const storage = multer.diskStorage({
   destination: (req, file ,cb) => {
+    if(!fs.existsSync('uploads')) {
+      fs.mkdirSync('uploads');
+    }
     cb(null, "uploads");
   },
   filename: (req, file, cb) => {
