@@ -34,6 +34,7 @@ router.get('/auth/me', checkAuth, UserController.getMe);
 router.get('/posts', PostController.getAll);
 router.get('/posts/popular', PostController.getAllPopular);
 router.get('/tags', PostController.getLastTags);
+router.get('/tags/:tag',PostController.getByTag);
 router.get('/posts/:id', PostController.getOne);
 router.post('/posts', checkAuth, postCreateValidation, handleValidationErrors, PostController.create);
 router.delete('/posts/:id', checkAuth, PostController.remove);

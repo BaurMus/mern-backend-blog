@@ -191,3 +191,22 @@ export const addComment = async (req, res) => {
     });
   }
 }
+
+export const getByTag = async (req, res) => {
+  try {
+    const tag = req.params.tag;
+
+    let posts = await PostModel.find({
+      tags: tag,
+    }).populate('user');
+
+    posts.map((obj) => obj.user.passwordHash = "");
+
+    res.json(posts);
+  } catch(err) {
+    console.log(err);
+    res.status(500).json({
+      message: "Не удалось получить статьи по тэгу"
+    });
+  }
+}
